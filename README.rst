@@ -40,6 +40,17 @@ Running Tests
 To run tests, do ``bundle exec rspec``.  Append ``--help`` or see rspec documentation
 for additional options to this command.
 
+
+Running Tests with Docker
+---------------------
+You can also use docker-compose to run your tests as follows (assuming you have
+docker-compose installed):
+
+.. code-block::
+
+    $ docker-compose -f .travis/docker-compose-travis.yml run --rm test-forum
+
+
 Internationalization (i18n) and Localization (l10n)
 ---------------------------------------------------
 

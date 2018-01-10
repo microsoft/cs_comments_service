@@ -1,4 +1,4 @@
-require 'task_helpers'
+require_relative '../task_helpers'
 
 namespace :search do
   def import_from_cursor(cursor, index, opts)
