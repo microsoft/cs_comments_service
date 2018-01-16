@@ -7,6 +7,10 @@ language: ruby
 rvm:
   - "1.9.3"
 
+branches:
+  only:
+  - master
+
 install:
   - docker-compose -f ./.travis/docker-compose-travis.yml up -d
 
