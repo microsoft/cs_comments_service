@@ -95,4 +95,5 @@ post "#{APIPREFIX}/users/:user_id/retire" do |user_id|
   user.unsubscribe_all
   user.retire_all_comments(params["retired_username"])
   user.update_attribute(:username, params["retired_username"])
+  user.to_json
 end
