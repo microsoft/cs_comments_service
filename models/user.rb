@@ -136,6 +136,34 @@ class User
     subscription
   end
 
+  def unsubscribe_all
+    # Unsubscribe this user from all their subscribed threads across all courses.
+    sub_threads = subscribed_threads
+    sub_threads.each {|sub_id| unsubscribe(sub_id) }
+  end
+
+  def all_comments
+    # Returns all comments authored by this user.
+    user_comments = Comment.where(author_id: self._id.to_s)
+    user_comments
+  end
+
+  def retire_comment(comment, retired_username)
+    # Retire a single comment.
+    comment.update(retired_username: retired_username)
+    comment.update(body: RETIRED_BODY)
+    if comment._type == "CommentThread"
+      comment.update(title: RETIRED_TITLE)
+    end
+    comment.save
+  end
+
+  def retire_all_comments(retired_username)
+    # Retire all comments authored by this user.
+    user_comments = all_comments
+    user_comments.each {|comment| retire_comment(comment, retired_username)}
+  end
+
   def mark_as_read(thread)
     read_state = read_states.find_or_create_by(course_id: thread.course_id)
     read_state.last_read_times[thread.id.to_s] = Time.now.utc
